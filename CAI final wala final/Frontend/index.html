@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Helping Hands bridges communication gaps through accessible sign language translation.">
+  <title>Helping Hands - Sign Language Translation Platform</title>
+  <link rel="icon" href="helping-hands-logo.jpeg">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header with Navigation -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <!-- Logo Dropdown -->
+      <div class="logo-container" aria-label="Main menu">
+        <img src="helping-hands-logo.jpeg" 
+            alt="Helping Hands Logo" 
+            class="logo">
+        <div class="dropdown-content" id="dropdown-menu" role="menu">
+          <button id="dark-mode-toggle" role="menuitem">Dark Mode</button>
+          <button id="logout" role="menuitem">Logout</button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" aria-label="Open navigation menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <div class="nav-links">
+        <div class="dropdown translate-dropdown">
+          <button class="dropdown-toggle">
+            Translate
+            <span class="dropdown-icon"></span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="http://localhost:8000/">Sign to Word</a>
+            <a href="http://localhost:8001/">Word to Sign</a>
+          </div>
+        </div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#user-section">Login</a>
+        <a href="#reviews-section">Reviews</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" aria-label="Introduction section">
+    <div class="hero-content">
+      <h1>We Understand What You Don't Say!</h1>
+      <div class="dropdown translate-dropdown">
+        <button class="translate-btn dropdown-toggle" id="translateBtn">
+          START TRANSLATING
+          <span class="dropdown-icon"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="http://127.0.0.1:8000/">Sign to Word</a>
+          <a href="http://127.0.0.1:8001/">Word to Sign</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="home-image.jpeg" 
+           alt="Diverse group communicating through sign language" 
+           loading="lazy"
+           width="600"
+           height="400">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" aria-label="About our mission">
+    <h1>Our Mission</h1>
+    <div class="mission-grid">
+      <article class="mission-card">
+        <h2>WHAT</h2>
+        <p>Our mission is to bridge communication gaps by converting sign language into text or speech, promoting inclusivity, accessibility, and seamless interaction between Deaf and hearing communities</p>
+      </article>
+      <article class="mission-card">
+        <h2>HOW</h2>
+        <p>We are creating an intuitive sign language interpretation website, employing Figma for design, the Canvas API for live video input, CNN models for accurate translation, and SQL for data management, to deliver a powerful and user-friendly tool for the community.</p>
+      </article>
+      <article class="mission-card">
+        <h2>WHO</h2>
+        <p>Our model can be used by all, may it  be for learning sign language or for instant translation for understanding the speaker.</p>
+      </article>
+      <article class="mission-card">
+        <h2>WHY</h2>
+        <p>The idea of sign language interpreters sprouts from the need for effective communication between deaf/mute and hearing individuals promoting accessibility, inclusion, and equal opportunities in various settings.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- User Section (Login & Comments) -->
+  <section id="user-section" aria-label="User interaction section">
+    <div class="top-sections-wrapper">
+      <!-- Reviews Section -->
+      <div id="comments-section">
+        <h2>Share Your Experience</h2>
+        <form id="comment-form">
+          <input type="text" id="username" placeholder="Your name"required class="form-input">
+          <textarea id="comment-input" placeholder="Write your review here..." maxlength="500" required class="form-textarea"></textarea>
+          <button type="submit" class="submit-btn">Post Review</button>
+        </form>
+      </div>
+
+      <!-- Authentication Section -->
+      <div id="login-section">
+        <h2>Join Our Community</h2>
+        <div class="tabs">
+          <button class="tab-btn active" id="signup-tab" aria-controls="signup-form">Sign Up</button>
+          <button class="tab-btn" id="login-tab" aria-controls="login-form">Login</button>
+        </div>
+
+        <!-- Sign Up Form -->
+        <form class="form-container" id="signup-form">
+          <div class="input-group">
+            <input type="email" id="signup-email" placeholder="Email" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="signup-password" placeholder="Password" required minlength="8">
+          </div>
+          <button type="submit">Create Account</button>
+        </form>
+
+        <form class="form-container hidden" id="login-form">
+          <div class="input-group">
+            <input type="text" id="login-credential" placeholder="Username/Email" required>
+          </div>
+          <div class="input-group">
+            <input type="password" id="login-password" placeholder="Password" required>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>    
+  </section>
+
+  <!-- Review-Section -->
+  <section id="Reviews">
+    <!-- Info-section -->
+    <div class="info-section">
+      <div class="contact-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>mridullath4@gmail.com</li>
+          <li>aksharasingh340@gmail.com</li>
+        </ul>
+      </div>
+      
+      <div class="team-column">
+        <h3>Our Team</h3>
+        <div class="team-list">
+          <ul>
+            <li>Mridul Lath</li>
+            <li>Akshat Varma</li>
+            <li>Aneesh Srivastava</li>
+          </ul>
+          <ul>
+            <li>Akshara Singh</li>
+            <li>Shubhangi Sinha</li>
+         
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div id="reviews-section" class="reviews-section">
+      <h2 class="reviews-header">Happy Users and Reviews</h2>
+      <div class="reviews-container" id="reviews-container">
+        <!-- Comments will be dynamically added here -->
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

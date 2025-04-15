@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Hands</title>
+    <meta name="description" content="Happy Hands - Real-time sign recognition using MediaPipe and OpenCV. Empowering communication through AI-driven hand gesture detection.">
+    
+</head>
+
+<body>
+    <header>
+        <h1>Happy Hands</h1>
+    </header>
+    <main>
+        <div class="camera-feed">
+            <!-- Prevents layout shift by defining width & height -->
+            <img src="{% url 'video_feed' %}" id="videoFeed" alt="Live sign language recognition feed" width="800" height="450">
+            
+            <button class="back-btn" onclick="quitApp()">Back</button>
+        </div>
+
+        <!-- Improved contrast, structure, and screen reader support -->
+        <div class="sign-container">
+            <p id="sign-text"> <span id="signMeaning" aria-live="polite">Waiting for detection...</span></p>
+        </div>
+    </main>
+    <hr>
+    <h3>Translate Something</h3>
+<form method="post" action="{% url 'recognition' %}">
+    {% csrf_token %}
+    <textarea name="text" rows="3" placeholder="Type something to translate..." class="translation-output"></textarea>
+<br>
+    <select name="lang">
+        <option value="hi">Hindi</option>
+        <option value="mr">Marathi</option>
+        <option value="te">Telugu</option>
+        <option value="gu">Gujarati</option>
+    </select>
+    <button type="submit" name="action" value="translate">Translate</button>
+</form>
+
+{% if translated_text %}
+<div class="translation-output">
+    <strong>Translated Text:</strong>
+    <p>{{ translated_text }}</p>
+</div>
+{% endif %}
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

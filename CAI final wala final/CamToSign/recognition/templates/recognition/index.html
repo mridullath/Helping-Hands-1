@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helping Hands</title>
+
+    <!-- Preload Google Fonts for Faster Rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    </noscript>
+
+    <!-- Preload Main CSS for Faster First Paint -->
+    <link rel="preload" href="{% static 'css/styles.css' %}" as="style">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <script defer src="{% static 'js/scripts.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>Helping Hands</h1>
+    </header>
+    
+    <main>
+        <div class="hero">
+            <h2>Welcome to the Helping Hands Recognition System</h2>
+            <p>Experience real-time Sign Language detection </p>
+
+            <!-- Ensuring proper button accessibility -->
+            <a href="{% url 'recognition' %}" aria-label="Start Sign Recognition">
+                <button class="start-btn">Start Recognition</button>
+            </a>
+        </div>
+    </main>

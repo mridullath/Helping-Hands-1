@@ -1,0 +1,66 @@
+<!-- translate1.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/jpeg" href="helping-hands-logo.jpeg">
+      <title>Helping Hands</title>
+      <link rel="stylesheet" href="style1.css">
+  </head>
+  <body>
+      <!-- Add this to translate1.html below <body> -->
+    <nav class="main-nav">
+      <div class="nav-content">
+          <img src="helping-hands-logo.jpeg" alt="Logo" class="nav-logo">
+          <div class="nav-menu">
+              <a href="index.html" class="nav-item">Home</a>
+              <a href="translate1.html" class="nav-item">Translate</a>
+          </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <!-- First Column -->
+        <div class="column">
+            <h2>Input Language</h2>
+            <div class="select-menu" id="input-lang">
+                <div class="tile active">INDIAN SIGN LANGUAGE</div>
+                <div class="tile">AMERICAN SIGN LANGUAGE</div>
+                <div class="tile">CHINESE SIGN LANGUAGE</div>
+            </div>
+        </div>
+
+        <!-- Second Column -->
+        <div class="column">
+            <h2>Conversion Type</h2>
+            <div class="alternating-menu">
+                <div class="option active" style="background-image: url('conversion-word.png')">
+                    <div class="overlay">To Word</div>
+                </div>
+                <div class="option" style="background-image: url('conversion-sign.png')">
+                    <div class="overlay">To Sign</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Column -->
+        <div class="column">
+            <h2>Output Language</h2>
+            <div class="select-menu" id="output-lang">
+                <div class="tile-image active" style="background-image: url('Hindi.png')"></div>
+                <div class="tile-image" style="background-image: url('Telugu.png')"></div>
+                <div class="tile-image" style="background-image: url('Marathi.png')"></div>
+                <div class="tile-image" style="background-image: url('English.png')"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this before closing body tag in translate1.html -->
+    <div class="confirm-container">
+      <button class="confirm-btn">Confirm Selection</button>
+    </div>
+
+    <script src="script1.js"></script>
+  </body>
+</html>

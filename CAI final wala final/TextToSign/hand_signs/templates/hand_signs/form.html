@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Sign Converter</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --primary-color: #2a2a72;
+            --secondary-color: #009ffd;
+            --text-color: #232528;
+            --background-color: #f8f9fa;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        #statement-form {
+            text-align: center; /* Center the form */
+            margin-bottom: 20px; /* Space below the form */
+        }
+
+        #results {
+            display: flex; /* Use flexbox to align items in a row */
+            flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+            gap: 20px; /* Space between images */
+            justify-content: center; /* Center the items horizontally */
+            margin-top: 20px;
+        }
+
+        .hand-sign {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 150px; /* Set a fixed width for each image container */
+            max-width: 100%; /* Ensure it doesn't exceed the container */
+            transition: transform var(--transition-speed);
+        }
+
+        .hand-sign:hover {
+            transform: translateY(-5px); /* Slight lift effect on hover */
+        }
+
+        .hand-sign img {
+            width: 100%; /* Make images responsive to the container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Optional: round the corners of the images */
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        button:hover {
+            background-color: #007acc; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Your Statement</h1>
+    <form id="statement-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Convert</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#statement-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                $.ajax({
+                    type: 'POST',
+                    url: '', // The URL to send the request to (same page)
+                    data: $(this).serialize(), // Serialize the form data
+                    success: function(response) {
+                        $('#results').empty(); // Clear previous results
+                        if (response.hand_signs.length > 0) {
+                            response.hand_signs.forEach(function(hand_sign) {
+                                $('#results').append('<div class="hand-sign"><p>' + hand_sign.text + '</p><img src="' + hand_sign.image_url + '" alt="' + hand_sign.text + '"></div>');
+                            });
+                        } else {
+                            $('#results').append('<p>No hand signs found for the given statement.</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

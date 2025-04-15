@@ -1,0 +1,951 @@
+/* ===== Base Styles ===== */
+:root {
+  --primary-color: #2a2a72;
+  --secondary-color: #009ffd;
+  --text-color: #232528;
+  --background-color: #f8f9fa;
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* ===== Navigation Styles ===== */
+.navbar {
+  background-color: white !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
+  padding: 0 5%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible !important; /* FIX: prevent clipping of dropdowns */
+}
+
+.logo-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: visible;  /* ensure dropdown is not clipped */
+  position: relative; /* contain absolute children */
+  display: inline-block;
+  transition: transform 0.2s ease;
+  z-index: 1001;
+}
+
+.logo-container img {
+  position: relative;
+  z-index: 1002;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: black;
+  background-color: #CCE3FB !important;
+  transform: translateY(-2px);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+/* ===== Dropdown Menu (Logo Container) ===== */
+.dropdown-content {
+  position: absolute;
+  display: block;
+  z-index: 9999;  /* FIX: high z-index so it sits above other elements */
+  background: white;
+  min-width: 160px;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-sizing: border-box; /* ensure padding and borders are contained */
+}
+
+.logo-container:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0;
+}
+
+.dropdown-content:hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 0.8rem;
+  box-sizing: border-box;
+}
+
+.dropdown-content button:hover {
+  background-color: #f5f5f5;
+  /* Removed transform: translateX(4px); */
+}
+
+/* ===== Hero Section ===== */
+#home {
+  display: flex;
+  align-items: center;
+  padding: 2rem 5%;
+  gap: 2rem;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+}
+
+.hero-content {
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.translate-btn {
+  background-color: #CCE3FB;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color var(--transition-speed);
+  margin-top: 1.5rem;
+}
+
+.translate-btn:hover {
+  background-color: #b0d0f0;
+}
+
+.hero-image {
+  flex: 0 0 65%;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* ===== Mission Section ===== */
+#about {
+  min-height: calc(100vh - 60px);
+  padding: 2rem 5%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-image: url('About-bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  align-items: center;
+  color: white;
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+#about h1 {
+  margin-bottom: 1.5rem;
+  font-size: 3.5rem;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+}
+
+.mission-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mission-card {
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  background-color: #FFFCF1;
+}
+
+.mission-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--text-color);
+}
+
+.mission-card p {
+  color: var(--text-color);
+  text-align: center;
+}
+
+.mission-card:hover {
+  transform: translateY(-5px);
+}
+
+.mission-grid .mission-card:nth-child(odd) {
+  transform: translateY(-10px);
+}
+
+.mission-grid .mission-card:nth-child(even) {
+  transform: translateY(10px);
+}
+
+.mission-grid .mission-card:nth-child(odd):hover {
+  transform: translateY(-20px);
+}
+
+.mission-grid .mission-card:nth-child(even):hover {
+  transform: translateY(0px);
+}
+
+/* ===== User Section ===== */
+#user-section {
+  height: calc(100vh - 60px);
+  padding: 2rem 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.top-sections-wrapper {
+  min-height: 70vh;
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* ----- Comments Section (Updated) ----- */
+#comments-section {
+  background-image: url('comments-section-bg.jpeg');
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; 
+  padding: 2.5rem;
+  flex: 1;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  height: auto;
+}
+
+#comments-section h2 {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+#comments-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  z-index: 0;
+}
+
+/* ----- Login Section (Adjusted) ----- */
+#login-section {
+  background-image: url('login-section-bg.jpeg');
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  height: auto;
+}
+
+#login-section h2 {
+  color: white;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+#login-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  z-index: 0;
+}
+
+#login-section .form-container {
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+#login-section .input-group {
+  margin-bottom: 1.5rem;
+}
+
+#login-section input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+#login-section button[type="submit"] {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color var(--transition-speed);
+}
+
+/* ===== Updated Comment Form Styles ===== */
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem 0;
+}
+
+.form-input {
+  width: 100%;
+  height: 38px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 160px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  margin: 0 0 1rem 0;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #CCE3FB;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #b0d0f0;
+}
+
+/* ===== Authentication Styles ===== */
+.hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+#login-form, #signup-form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  padding: 0.3rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.comment-form .input-group {
+  margin-bottom: 1rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 120px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.comment-form button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color var(--transition-speed);
+  align-self: flex-start;
+}
+
+.comment-form button[type="submit"]:hover {
+  background-color: #1a1a72;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button[type="submit"] {
+  background-color: #CCE3FB;
+  color: var(--text-color);
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+  background-color: #b0d0f0;
+}
+
+/* ===== Reviews Container Section ===== */
+#Reviews {
+  min-height: calc(100vh - 60px); /* Changed from height to min-height */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0; /* Added vertical padding */
+  gap: 20px; /* Added gap between sections */
+  background: linear-gradient(to bottom, #f8f9f8, #CCE3FB);
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* ===== Info Section Styles (Now Inside #Reviews) ===== */
+#Reviews .info-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 2rem; /* Reduced padding to match reviews-section */
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  background-color: #fff;
+  margin: 1rem auto; /* Centered with same vertical margin as reviews-section */
+  width: 95%; /* Match reviews-section width */
+  height: auto;
+  max-width: 1400px; /* Same max-width constraint */
+}
+
+#Reviews .info-section .contact-column,
+#Reviews .info-section .team-column {
+  flex: 1;
+  margin: 0 1rem;
+}
+
+#Reviews .info-section .contact-column ul,
+#Reviews .info-section .team-column ul {
+  list-style: disc inside;
+  margin-left: 1rem;
+}
+
+#Reviews .info-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+#Reviews .info-section ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin: 0;
+}
+
+#Reviews .info-section li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+#Reviews .team-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ===== Reviews Section Styles (Now Inside #Reviews) ===== */
+#Reviews .reviews-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0; /* Remove padding from parent */
+  margin: 2rem auto;
+  width: 95%;
+  max-width: 1400px;
+  height: 70vh; /* Fixed height for section */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+#Reviews .reviews-header {
+  position: sticky;
+  top: -20px; /* Compensate for section padding */
+  background: white;
+  z-index: 2;
+  padding: 15px 0;
+  margin: 0 10px; /* Match container margins */
+  border-bottom: 2px solid #eee;
+  align-self: center;
+}
+
+#Reviews .reviews-container {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin: 0 10px 10px; /* Horizontal spacing from section edges */
+  padding: 15px;
+  width: calc(100% - 20px); /* Account for horizontal margins */
+  height: calc(100% - 120px); /* Account for header/pagination space */
+}
+  
+#Reviews .review-item {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+#Reviews .review-item:last-child {
+  border-bottom: none;
+}
+
+#Reviews .username {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+/* ===== Updated Dropdown Styles ===== */
+
+/* Translate Dropdown Container - ensure positioning context */
+.translate-dropdown {
+  position: relative;
+  display: inline-block;
+  overflow: visible; /* FIX: prevent clipping of dropdown menu */
+}
+
+/* Dropdown toggle styles */
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 1rem 2.5rem 1rem 2rem; /* Added left/right padding */
+  border-radius: 20px; /* Match button radius */
+  transition: all var(--transition-speed);
+  box-sizing: border-box;
+}
+
+/* Specific style for hero button */
+#translateBtn.dropdown-toggle {
+  background-color: #CCE3FB;
+  padding-right: 3rem; /* Extra space for icon */
+}
+
+/* Dropdown icon */
+.dropdown-icon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  position: absolute;
+  right: 1.5rem; /* Position from right */
+  transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 5px); /* Add small gap */
+  right: 0; /* Align to right */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 8px 0;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 9999; /* FIX: high z-index */
+  box-sizing: border-box;
+}
+
+.dropdown-menu a {
+  color: var(--text-color);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.dropdown-menu a:hover {
+  background: #CCE3FB;
+  /* Removed transform: translateX(4px); */
+}
+
+/* Show dropdown on hover/focus states */
+.translate-dropdown:hover .dropdown-menu,
+.translate-dropdown:focus-within .dropdown-menu,
+.dropdown-toggle.active + .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Navigation dropdown specific styles */
+.nav-links .dropdown-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem 0.5rem 1rem !important; /* Force padding */
+  border-radius: 4px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.nav-links .dropdown-toggle:hover {
+  background-color: #CCE3FB !important;
+  color: var(--text-color) !important;
+}
+
+.nav-links .dropdown-icon {
+  right: 0.75rem; /* Adjusted position */
+}
+
+/* Fix button hover overflow */
+.nav-links .dropdown-toggle,
+#translateBtn.dropdown-toggle {
+  overflow: visible; /* Ensure icon stays visible */
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+/* Hero button hover fix */
+#translateBtn.dropdown-toggle:hover {
+  background-color: #b0d0f0;
+}
+
+/* ===== Responsive Design Additions ===== */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--primary-color);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  #home {
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 20px 40px;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .hero-image {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #user-section {
+    flex-direction: column;
+    height: auto;
+  }
+
+  #Reviews .info-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  #Reviews .reviews-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  #Reviews .info-section,
+  #Reviews .reviews-section {
+    width: 92%;
+    padding: 1.5rem;
+  }
+
+  #Reviews .reviews-header {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-sections-wrapper {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  #comments-section,
+  #login-section {
+    min-height: auto;
+  }
+
+  .form-textarea {
+    height: 120px;
+  }
+}
+
+/* ===== Dark Mode Support ===== */
+[data-theme="dark"] {
+  --text-color: #ffffff;
+  --background-color: #1a1a1a;
+}
+
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .mission-card,
+[data-theme="dark"] .dropdown-content {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+[data-theme="dark"] .dropdown-content button {
+  color: white;
+}
+
+[data-theme="dark"] .mission-card h2,
+[data-theme="dark"] .mission-card p {
+  color: white;
+}
+
+[data-theme="dark"] #comment-form textarea::placeholder {
+  color: #ccc;
+}
+
+[data-theme="dark"] #comments-section,
+[data-theme="dark"] #login-section .form-container,
+[data-theme="dark"] #Reviews .info-section,
+[data-theme="dark"] #Reviews .reviews-section {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+[data-theme="dark"] textarea,
+[data-theme="dark"] input {
+  background-color: #383838;
+  border-color: #444;
+  color: white;
+}
+
+.dropdown-content.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin-top: 0 !important;
+}
+
+/* ===== Additional Overflow & Transform Fixes ===== */
+.navbar,
+.logo-container,
+.translate-dropdown {
+  overflow: visible !important;
+  transform: none !important;
+}
