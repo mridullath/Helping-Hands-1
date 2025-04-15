@@ -1,0 +1,6 @@
+numpy
+joblib
+opencv-python
+googletrans
+django
+mediapipe
