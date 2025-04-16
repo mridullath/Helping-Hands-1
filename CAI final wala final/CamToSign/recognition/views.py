@@ -9,7 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 from googletrans import Translator
 
 # Load the ASL model
-asl_model = joblib.load("sign_language_model.pkl")
+try:
+    asl_model = joblib.load("sign_language_model.pkl")
+except Exception as e:
+    asl_model = None
+    print(f"Error loading model: {e}")
 
 # Initialize MediaPipe Holistic Model
 mp_holistic = mp.solutions.holistic
@@ -39,19 +43,22 @@ def process_frame(img):
     global detected_sign
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     res = holistic.process(img_rgb)
-    points = []
 
-    if res.left_hand_landmarks:
-        points.extend([lm.x for lm in res.left_hand_landmarks.landmark])
-        points.extend([lm.y for lm in res.left_hand_landmarks.landmark])
-        points.extend([lm.z for lm in res.left_hand_landmarks.landmark])
+    def extract_hand_landmarks(hand_landmarks):
+        if not hand_landmarks:
+            return [0.0] * 63  # 21 landmarks × 3 coordinates
+        return [coord for lm in hand_landmarks.landmark for coord in (lm.x, lm.y, lm.z)]
 
-    if res.right_hand_landmarks:
-        points.extend([lm.x for lm in res.right_hand_landmarks.landmark])
-        points.extend([lm.y for lm in res.right_hand_landmarks.landmark])
-        points.extend([lm.z for lm in res.right_hand_landmarks.landmark])
+    left_hand = extract_hand_landmarks(res.left_hand_landmarks)
+    right_hand = extract_hand_landmarks(res.right_hand_landmarks)
 
-    detected_sign = asl_model.predict([points])[0] if len(points) == 126 else "Waiting..."
+    points = left_hand + right_hand  # Total: 126 features
+
+    if asl_model and len(points) == 126:
+        detected_sign = asl_model.predict([points])[0]
+    else:
+        detected_sign = "Waiting..."
+
     img = cv2.resize(img, (480, 360))
     return img
 
@@ -67,7 +74,8 @@ def stream_frames():
             frame = process_frame(frame)
             _, buf = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 65])
 
-        yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + buf.tobytes() + b'\r\n')
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + buf.tobytes() + b'\r\n')
 
 def home(request):
     return render(request, "recognition/index.html")
@@ -79,8 +87,8 @@ def recognition(request):
     translated_text = ""
 
     if request.method == "POST" and request.POST.get("action") == "translate":
-        text = request.POST.get("text")
-        lang = request.POST.get("lang")
+        text = request.POST.get("text", "")
+        lang = request.POST.get("lang", "hi")
         translator = Translator()
         try:
             translated = translator.translate(text, dest=lang)
