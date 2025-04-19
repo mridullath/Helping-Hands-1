@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,34 +12,40 @@
             --primary-color: #2a2a72;
             --secondary-color: #009ffd;
             --text-color: #232528;
-            --background-color: #f8f9fa;
             --transition-speed: 0.3s;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
+            font-family: 'Bigshot One', Bigshot One;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
             color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-image: url("{% static 'background.png' %}"); /* Direct static path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f0f0f0;
         }
 
         h1 {
             color: var(--primary-color);
-            text-align: center; /* Center the heading */
-            margin-bottom: 20px; /* Space below the heading */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         #statement-form {
-            text-align: center; /* Center the form */
-            margin-bottom: 20px; /* Space below the form */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         #results {
-            display: flex; /* Use flexbox to align items in a row */
-            flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
-            gap: 20px; /* Space between images */
-            justify-content: center; /* Center the items horizontally */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
             margin-top: 20px;
         }
 
@@ -49,19 +56,19 @@
             padding: 10px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 150px; /* Set a fixed width for each image container */
-            max-width: 100%; /* Ensure it doesn't exceed the container */
+            width: 150px;
+            max-width: 100%;
             transition: transform var(--transition-speed);
         }
 
         .hand-sign:hover {
-            transform: translateY(-5px); /* Slight lift effect on hover */
+            transform: translateY(-5px);
         }
 
         .hand-sign img {
-            width: 100%; /* Make images responsive to the container */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 5px; /* Optional: round the corners of the images */
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
 
         button {
@@ -75,7 +82,7 @@
         }
 
         button:hover {
-            background-color: #007acc; /* Darker shade on hover */
+            background-color: #007acc;
         }
     </style>
 </head>
