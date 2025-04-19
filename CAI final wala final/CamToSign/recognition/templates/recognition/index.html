@@ -17,10 +17,32 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <script defer src="{% static 'js/scripts.js' %}"></script>
+
+    <style>
+        /* CSS to position the back button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007BFF; /* Button color */
+            color: white; /* Text color */
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Helping Hands</h1>
+        <!-- Back Button -->
+        <a href="http://127.0.0.1:5500/Frontend/index.html" class="back-btn" aria-label="Back to Home">Back</a>
     </header>
     
     <main>
@@ -34,3 +56,5 @@
             </a>
         </div>
     </main>
+</body>
+</html>

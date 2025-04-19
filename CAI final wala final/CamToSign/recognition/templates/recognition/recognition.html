@@ -30,8 +30,7 @@
             <p id="sign-text"> <span id="signMeaning" aria-live="polite">Waiting for detection...</span></p>
         </div>
     </main>
-    <hr>
-    <h3>Translate Something</h3>
+      <h3>Translate Something</h3>
 <form method="post" action="{% url 'recognition' %}">
     {% csrf_token %}
     <textarea name="text" rows="3" placeholder="Type something to translate..." class="translation-output"></textarea>
