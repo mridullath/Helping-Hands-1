@@ -2,7 +2,7 @@ Project name- Helping Hands
 Motive - To help provide a translation medium for the sign language users world wide 
 Initiator - Mridul Lath
 Team- Mridul Lath [Full stack developer]
-      Aneesh Srivastav [Coder]
+      Aneesh Srivastava [Coder]
       Akshara Singh [UI/UX Designer]
       Akshat Varma [Web Developer]
 
